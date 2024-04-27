@@ -18,6 +18,13 @@ def downtear(self):
     '''Status of your API'''
     storage.close()
 
+
+@app.errorhandler(404)
+def error_not_found(error):
+    '''To return not found error'''
+    response = {"error": "Not found"}
+    return (jsonify(response), 404)
+
 if __name__ == "__main__":
     host = getenv('HBNB_API_HOST')
     port = getenv('HBNB_API_PORT')
