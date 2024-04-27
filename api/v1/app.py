@@ -1,35 +1,24 @@
-#!/usr/bin/python3
-"""Flask server (variable app)
-"""
-
-
-from flask import Flask, jsonify
+# api/v1/app.py
+from flask import Flask
 from models import storage
-from os import getenv
 from api.v1.views import app_views
+import os
 
+# Create a Flask application instance
 app = Flask(__name__)
-app.register_blueprint(app_views)
-app.url_map.strict_slashes = False
 
+# Register the blueprint app_views to the Flask instance app
+app.register_blueprint(app_views, url_prefix='/api/v1')
 
+# Define a method to handle teardown_appcontext
 @app.teardown_appcontext
-def downtear(self):
-    '''Status of your API'''
+def teardown_storage(exception):
+    """Close the storage engine at the end of the request."""
     storage.close()
 
-
-@app.errorhandler(404)
-def page_not_found(error):
-    '''return render_template'''
-    return jsonify('error='Not found'), 404
-
-
+# Run the Flask server if this script is executed directly
 if __name__ == "__main__":
-    host = getenv('HBNB_API_HOST')
-    port = getenv('HBNB_API_PORT')
-    if not host:
-        host = '0.0.0.0'
-    if not port:
-        port = '5000'
+    # Define host and port based on environment variables or defaults
+    host = os.getenv('HBNB_API_HOST', '0.0.0.0')
+    port = int(os.getenv('HBNB_API_PORT', 5000))
     app.run(host=host, port=port, threaded=True)
