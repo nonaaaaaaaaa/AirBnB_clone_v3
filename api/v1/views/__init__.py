@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import Blueprint
 
 # Create a Blueprint object with the url prefix /api/v1

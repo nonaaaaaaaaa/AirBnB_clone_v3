@@ -1,9 +1,13 @@
-# api/v1/views/index.py
+#!/usr/bin/python3
+'''api status'''
+import models
+from models import storage
+from models.base_model import BaseModel
 from flask import jsonify
-from . import app_views
+from api.v1.views import app_views
 
-# Define the route for the /status endpoint
-@app_views.route('/status', methods=['GET'])
-def get_status():
-    """Return a JSON response with status OK."""
-    return jsonify({"status": "OK"})
+
+@app_views.route('/status', strict_slashes=False)
+def returnstuff():
+    '''return stuff'''
+    return jsonify(status='OK')
