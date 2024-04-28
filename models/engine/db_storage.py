@@ -88,4 +88,10 @@ class DBStorage:
 
     def count(self, cls=None):
         '''class (optional)'''
-        return (len(self.all(cls)))
+        if cls:
+            return {cls.__name__: len(self.all(cls))}
+        else:
+            counts = {}
+            for clss in classes.values():
+                counts[clss.__name__] = len(self.all(clss))
+            return counts
