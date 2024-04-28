@@ -5,7 +5,6 @@ from models import storage
 from models.base_model import BaseModel
 from flask import jsonify
 from api.v1.views import app_views
-from models import State
 
 
 @app_views.route('/status', strict_slashes=False)
