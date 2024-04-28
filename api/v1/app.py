@@ -25,6 +25,7 @@ def error_not_found(error):
     response = {"error": "Not found"}
     return (jsonify(response), 404)
 
+
 if __name__ == "__main__":
     host = getenv('HBNB_API_HOST')
     port = getenv('HBNB_API_PORT')
