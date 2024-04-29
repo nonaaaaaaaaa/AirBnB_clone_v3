@@ -4,6 +4,7 @@
 from models import storage
 from flask import jsonify
 from api.v1.views import app_views
+from models.state import State
 
 
 @app_views.route('/status', strict_slashes=False)
@@ -16,7 +17,7 @@ def returnstuff():
 def stats():
     '''JSON Responses'''
     todos = {
-            "states": storage.count("State"),
+            "states": storage.count('State'),
             "cities": storage.count("City"),
             "amenities": storage.count("Amenity"),
             "places": storage.count("Place"),
